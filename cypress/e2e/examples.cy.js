@@ -4,30 +4,28 @@ describe("Various examples", () => {
 	});
 
 	it("multi-page test", () => {
+		cy.location("pathname").should("eq", "/examples");
+
 		cy.getDataTest("nav-overview").click();
-		cy.location("pathname").should("equal", "/overview");
+		cy.location("pathname").should("eq", "/overview");
 
 		cy.getDataTest("nav-why-cypress").click();
-		cy.location("pathname").should("equal", "/");
+		cy.location("pathname").should("eq", "/");
 
 		cy.getDataTest("nav-fundamentals").click();
-		cy.location("pathname").should("equal", "/fundamentals");
+		cy.location("pathname").should("eq", "/fundamentals");
 
 		cy.getDataTest("nav-forms").click();
-		cy.location("pathname").should("equal", "/forms");
-
-		cy.getDataTest("nav-examples").click();
-		cy.location("pathname").should("equal", "/examples");
+		cy.location("pathname").should("eq", "/forms");
 
 		cy.getDataTest("nav-component").click();
-		cy.location("pathname").should("equal", "/component");
+		cy.location("pathname").should("eq", "/component");
 
 		cy.getDataTest("nav-best-practices").click();
-		cy.location("pathname").should("equal", "/best-practices");
+		cy.location("pathname").should("eq", "/best-practices");
 	});
 
 	it("intercepts", () => {
-		// cy.visit("/examples");
 		cy.intercept("POST", "http://localhost:3000/examples", {
 			fixture: "example.json",
 		}).as("postRequest");
@@ -35,7 +33,7 @@ describe("Various examples", () => {
 		cy.wait("@postRequest");
 	});
 
-	it.only("grudges", () => {
+	it("grudges", () => {
 		cy.contains(/add some grudges/i);
 
 		cy.getDataTest("grudge-list").within(() => {
